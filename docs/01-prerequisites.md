@@ -2,7 +2,7 @@
 
 ## Development Environment
 
-This tutorial was created and tested on macOS Mojave Version 10.14.1.  
+This tutorial was created and tested on Ubuntu 18.04.
 
 ## MaaS (Metal as a Service) Environment Setup
 
@@ -14,9 +14,35 @@ You need one small server for MAAS and at least three addiitonal servers which c
 
 ### Install Ubuntu Server
 
-Download [Ubuntu Server 18.04 LTS](https://www.ubuntu.com/download/server?_ga=2.153985402.338891312.1544130217-65962038.1544130217) and follow the step-by-step installation instructions on your MAAS server.
+Install the base Ubunutu Operating system by downloading [Ubuntu Server 18.04 LTS](https://www.ubuntu.com/download/server?_ga=2.153985402.338891312.1544130217-65962038.1544130217) and follow the step-by-step installation instructions on your server.
+
+SSH into your server.
+
+```
+ssh ubuntu@xxx.xxx.xxx.xxx
+```
+
+> xxx.xxx.xxx.xxx = <your.maas-server.ip>
+
+Verify your Operating System version
+
+```
+lsb_release -a
+```
+
+> output
+
+```
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.1 LTS
+Release:	18.04
+Codename:	bionic
+```
 
 ### Install MaaS
+
+Once Ubuntu is finished installing SSH into your Ubuntu server and install the MaaS application
 
 ```
 sudo apt update && sudo apt install maas
@@ -24,7 +50,7 @@ sudo apt update && sudo apt install maas
 
 ### Create MaaS admin user
 
-Create your admin credentials by typing.
+Create your MaaS admin credentials by typing.
 
 ```
 sudo maas init
@@ -42,7 +68,7 @@ Follow the instructions on screen to complete the installation of MAAS. I used t
     * Ubuntu images
     * SSH keys (for currently logged in user)
     
-> SSH keys added to an account will will be automatically uploaded to any provisioned system node by user account. 
+> SSH keys added to an account will will be automatically uploaded to any provisioned node by the user account. 
 
 ### Turn on DHCP
 

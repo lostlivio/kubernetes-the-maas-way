@@ -140,7 +140,10 @@ The programs included with the Ubuntu system are free software;
 the exact distribution terms for each program are described in the
 individual files in /usr/share/doc/*/copyright.
 
-Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permit
+
+
+  ted by
 applicable law.
 
 To run a command as administrator (user "root"), use "sudo <command>".
