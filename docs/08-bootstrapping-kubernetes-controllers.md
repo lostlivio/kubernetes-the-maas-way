@@ -65,7 +65,7 @@ Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
 ExecStart=/usr/local/bin/kube-apiserver \\
-  --advertise-address=${INTERNAL_IP} \\
+  --advertise-address=${CONTROLLER_IP_ADDRESS} \\
   --allow-privileged=true \\
   --apiserver-count=3 \\
   --audit-log-maxage=30 \\
@@ -107,7 +107,7 @@ EOF
 Move the `kube-controller-manager` kubeconfig into place:
 
 ```
-sudo mv kube-controller-manager.kubeconfig /var/lib/kubernetes/
+sudo mv /secrets/kube-controller-manager.kubeconfig /var/lib/kubernetes/
 ```
 
 Create the `kube-controller-manager.service` systemd unit file:
@@ -202,7 +202,7 @@ In this section nginx will be installed and configured to accept HTTP health che
 Install a basic web server to handle HTTP health checks:
 
 ```
-sudo apt-get install -y nginx
+sudo apt install -y nginx
 ```
 
 ```
