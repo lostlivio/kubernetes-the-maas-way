@@ -4,6 +4,12 @@ Provision PKI Infrastructure, bootstrap a Certificate Authority, and generate TL
 
 ## Certificate Authority
 
+Create a Folder to store all the secrets
+
+```
+mkdir secrets
+```
+
 Create the CA configuration file and the CA certificate signing request::
 
 ```
