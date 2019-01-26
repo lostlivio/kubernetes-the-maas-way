@@ -41,7 +41,19 @@ MAAS_USERNAME=<insert_maas_username>
 ```
 
 ```
+MAAS_API_KEY=<insert_maas_user_api_key>
+```
+
+> The API key can be retrieved from the MaaS UI by clicking on your account name at the top right hand corner of the screen.
+
+```
 MAAS_IP_ADDRESS=<insert_maas_ip_address>
+```
+
+Login to MaaS via the CLI 
+
+```
+maas login $MAAS_USERNAME http://localhost/MAAS/api/2.0/ $MAAS_API_KEY
 ```
 
 ### Kubernetes Controller IP Address
@@ -49,7 +61,7 @@ MAAS_IP_ADDRESS=<insert_maas_ip_address>
 Get the controller IP address and populate the Controller IP Address into an environment variable
 
 ```
-export CONTROLLER_PUBLIC_ADDRESS=$(ssh ubuntu@$MAAS_IP_ADDRESS "maas $MAAS_USERNAME tag nodes controller" | jq -r '.[].ip_addresses[0]')
+export CONTROLLER_PUBLIC_ADDRESS=$(maas $MAAS_USERNAME tag nodes controller | jq -r '.[].ip_addresses[0]')
 ```
 
 > Note: If your servers have more than 1 interface, you will need to get fancy to iterate over the ip_addresses[index]. 
@@ -62,10 +74,10 @@ Get the Worker IP addresses and populate the Worker Nodes IP Address into an env
 
 ```
 {
-  i=1
-  for instance in $(ssh ubuntu@$MAAS_IP_ADDRESS "maas $MAAS_USERNAME tag nodes worker" | jq -r '.[].ip_addresses[0]'); do
+  i=1 
+  for instance in $(maas $MAAS_USERNAME tag nodes worker | jq -r '.[].ip_addresses[0]'); do
     eval export WORKER_$i=$instance
-    ((i++))
+   ((i++))
   done
 }
 ```
