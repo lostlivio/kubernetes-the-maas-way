@@ -47,13 +47,24 @@ MAAS_API_KEY=<insert_maas_user_api_key>
 > The API key can be retrieved from the MaaS UI by clicking on your account name at the top right hand corner of the screen.
 
 ```
-MAAS_IP_ADDRESS=<insert_maas_ip_address>
+MAAS_IP_ADDRESS=localhost
 ```
 
 Login to MaaS via the CLI 
 
 ```
-maas login $MAAS_USERNAME http://localhost/MAAS/api/2.0/ $MAAS_API_KEY
+maas login $MAAS_USERNAME http://$MAAS_IP_ADDRESS/MAAS/api/2.0/ $MAAS_API_KEY
+```
+
+> output 
+
+```
+You are now logged in to the MAAS server at
+http://localhost/MAAS/api/2.0/ with the profile name '<Your Username>'.
+
+For help with the available commands, try:
+
+  maas <Your Username> --help
 ```
 
 ### Kubernetes Controller IP Address
@@ -112,68 +123,22 @@ SSH will be used to configure the controller and worker instances.
 Test SSH access to each of your compute instances:
 
 ```
-ssh ubuntu@$CONTROLLER_PUBLIC_ADDRESS
+{
+  echo $(ssh -oStrictHostKeyChecking=no ubuntu@$CONTROLLER_PUBLIC_ADDRESS "hostname && lsb_release -a")
+  echo $(ssh -oStrictHostKeyChecking=no ubuntu@$WORKER_1 "hostname && lsb_release -a")
+  echo $(ssh -oStrictHostKeyChecking=no ubuntu@$WORKER_2 "hostname && lsb_release -a")
+}
 ```
 
-```
-ssh ubuntu@$WORKER_1
-```
+> Output 
 
 ```
-ssh ubuntu@$WORKER_2
-```
-
-You should see the following prompt for each of the nodes
-
-### Verification
-
-```
-Welcome to Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0-42-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-  System information as of Thu Dec  6 22:43:52 UTC 2018
-
-  System load:  0.0                Processes:              116
-  Usage of /:   2.5% of 228.23GB   Users logged in:        0
-  Memory usage: 1%                 IP address for enp0s25: x.x.x.x
-  Swap usage:   0%
-
-
-  Get cloud support with Ubuntu Advantage Cloud Guest:
-    http://www.ubuntu.com/business/services/cloud
-
-3 packages can be updated.
-3 updates are security updates.
-
-The programs included with the Ubuntu system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permit
-
-
-  ted by
-applicable law.
-
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
-ubuntu@nuc-01:
-...
-
-Type `exit` at the prompt to exit the compute instance:
-
-```
-ubuntu@nuc-01:~$ exit
-```
-> output
-
-```
-logout
-Connection to x.x.x.x closed.
+No LSB modules are available.
+<controller_host_name> Distributor ID: Ubuntu Description: Ubuntu 18.04.1 LTS Release: 18.04 Codename: bionic
+No LSB modules are available.
+<worker1_host_name> Distributor ID: Ubuntu Description: Ubuntu 18.04.1 LTS Release: 18.04 Codename: bionic
+No LSB modules are available.
+<worker2host_name> Distributor ID: Ubuntu Description: Ubuntu 18.04.1 LTS Release: 18.04 Codename: bionic
 ```
 
 Next: [Provisioning a CA and Generating TLS Certificates](04-certificate-authority.md)
