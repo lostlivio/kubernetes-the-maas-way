@@ -96,3 +96,5 @@ Now MAAS is ready to enlist and commission machines.
 View from **NODES** Tab
 
 ![MaaS Ready Image](/images/maas-ready.png)
+
+Next: [Installing Client Tools](02-client-tools.md)
